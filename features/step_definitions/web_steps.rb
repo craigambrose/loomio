@@ -29,3 +29,8 @@ end
 Then /^debugger$/ do
   debugger
 end
+
+Then /^screenshot$/ do
+  page.driver.render('./screenshots/file.png', :full => true)
+end
+

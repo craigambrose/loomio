@@ -31,10 +31,10 @@ class UsersController < BaseController
   def update
     @user = @restricted_user || current_user
     if @user.update_attributes(params[:user])
-      flash[:notice] = "Your settings have been updated."
+      flash[:notice] = t("notice.settings_updated")
       redirect_to :root
     else
-      flash[:error] = "Your settings did not get updated."
+      flash[:error] = t("error.settings_not_updated")
       redirect_to :back
     end
   end
@@ -54,7 +54,7 @@ class UsersController < BaseController
     end
 
     unless current_user.save
-      flash[:error] = "Unable to upload picture. Make sure the picture is under 1 MB and is a .jpeg, .png, or .gif file."
+      flash[:error] = t("error.image_upload_fail")
     end
     redirect_to :back
   end

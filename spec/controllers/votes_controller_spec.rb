@@ -65,7 +65,7 @@ describe VotesController do
         end
         it "assigns flash success message" do
           post :update, @vote_args
-          flash[:success].should =~ /Vote updated/
+          flash[:success].should =~ /Position updated/
         end
         it "redirects to motion discussion" do
           post :update, @vote_args
