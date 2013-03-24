@@ -17,7 +17,7 @@ class Motion < ActiveRecord::Base
 
   delegate :email, :to => :author, :prefix => :author
   delegate :name, :to => :author, :prefix => :author
-  delegate :group, :to => :discussion
+  delegate :group, :group_id, :to => :discussion
   delegate :users, :full_name, :to => :group, :prefix => :group
   delegate :email_new_motion?, to: :group, prefix: :group
 
@@ -51,10 +51,6 @@ class Motion < ActiveRecord::Base
 
   def group_users_without_motion_author
     group.users.where(User.arel_table[:id].not_eq(author.id))
-  end
-
-  def user_has_voted?(user)
-    votes.map{|v| v.user.id}.include?(user.id)
   end
 
   def with_votes
@@ -144,18 +140,6 @@ class Motion < ActiveRecord::Base
 
   def percent_voted
     (100-(no_vote_count/group_count.to_f * 100)).to_i
-  end
-
-  def users_who_did_not_vote
-    if voting?
-      users = []
-      group.users.each do |user|
-        users << user unless user_has_voted?(user)
-      end
-      users
-    else
-      did_not_votes.map{ |did_not_vote| did_not_vote.user }
-    end
   end
 
   def group_count

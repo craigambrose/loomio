@@ -480,7 +480,7 @@ describe User do
     end
   end
 
-  describe "usernames" do 
+  describe "usernames" do
     it "generates a unique username after invitation accepted" do
       user1 = User.new
       user1.name = "Test User"
@@ -512,6 +512,5 @@ describe User do
       user.generate_username
       user.username.should == "rcharddbartlett"
     end
-
   end
 end
