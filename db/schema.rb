@@ -156,7 +156,6 @@ ActiveRecord::Schema.define(:version => 20130318033458) do
     t.boolean  "hide_members",         :default => false
     t.boolean  "beta_features",        :default => false
     t.string   "description"
-    t.integer  "creator_id",                              :null => false
     t.integer  "memberships_count",    :default => 0,     :null => false
     t.datetime "archived_at"
     t.integer  "max_size"
@@ -166,6 +165,7 @@ ActiveRecord::Schema.define(:version => 20130318033458) do
     t.string   "other_sectors_metric"
     t.integer  "discussions_count",    :default => 0,     :null => false
     t.integer  "motions_count",        :default => 0,     :null => false
+    t.integer  "creator_id"
   end
 
   add_index "groups", ["parent_id"], :name => "index_groups_on_parent_id"
@@ -199,13 +199,13 @@ ActiveRecord::Schema.define(:version => 20130318033458) do
     t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "phase",          :default => "voting", :null => false
     t.string   "discussion_url", :default => "",       :null => false
     t.datetime "close_date"
     t.integer  "discussion_id"
     t.string   "outcome"
     t.datetime "last_vote_at"
     t.boolean  "uses_markdown",  :default => true,     :null => false
+    t.string   "phase",          :default => "voting", :null => false
   end
 
   add_index "motions", ["author_id"], :name => "index_motions_on_author_id"
@@ -256,14 +256,14 @@ ActiveRecord::Schema.define(:version => 20130318033458) do
     t.boolean  "has_read_dashboard_notice",                                   :default => false,      :null => false
     t.boolean  "has_read_group_notice",                                       :default => false,      :null => false
     t.boolean  "has_read_discussion_notice",                                  :default => false,      :null => false
-    t.string   "username"
     t.boolean  "subscribed_to_daily_activity_email",                          :default => true,       :null => false
     t.boolean  "subscribed_to_mention_notifications",                         :default => true,       :null => false
     t.boolean  "subscribed_to_proposal_closure_notifications",                :default => true,       :null => false
+    t.string   "username"
     t.string   "authentication_token"
     t.string   "unsubscribe_token"
-    t.integer  "memberships_count",                                           :default => 0,          :null => false
     t.boolean  "uses_markdown",                                               :default => false
+    t.integer  "memberships_count",                                           :default => 0,          :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
